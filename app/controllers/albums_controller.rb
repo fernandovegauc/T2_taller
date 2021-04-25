@@ -22,6 +22,9 @@ class AlbumsController < ApplicationController
 
   def index
     return render json: Album.all, status: 200 if params[:artist_id].blank?
+
+    return render status: 404 if Artist.find_by(id: params[:artist_id]).blank?
+
     render json: Album.where(artist_id: params[:artist_id]), status: 200
   end
   
