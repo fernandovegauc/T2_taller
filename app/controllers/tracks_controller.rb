@@ -30,7 +30,7 @@ class TracksController < ApplicationController
     elsif params[:artist_id].present?
       artist = Artist.find_by(id: params[:artist_id])
       return render status: 404 if artist.blank?
-      return render status: 200
+      return render json: artist.albums.map { |album| album.tracks }.flatten, status: 200
     else
       render json: Track.all, status: 200
     end
