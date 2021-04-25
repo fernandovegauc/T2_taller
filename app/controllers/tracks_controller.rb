@@ -23,7 +23,7 @@ class TracksController < ApplicationController
   def index
     return render json: Track.all, status: 200 if (params[:album_id].blank? && params[:artist_id].blank?)
     
-    return render json: Track.where(album_id: params[:album_id]), status: 200 if params[:album_id].present? 
+    return render json: (Album.find_by(id: params[:album_id])).tracks, status: 200 if params[:album_id].present? 
 
     return render status: 404 if Artist.find_by(id: params[:artist_id]).blank?
 
