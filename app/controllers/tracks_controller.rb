@@ -36,10 +36,6 @@ class TracksController < ApplicationController
       render json: Track.all, status: 200
     end
   end
-   
-    
-    
-  end
 
   def show
     track = Track.find_by id: params[:id]
