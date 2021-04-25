@@ -57,7 +57,7 @@ class TracksController < ApplicationController
 
       
     else
-      render json: :status => 404
+      render  :status => 404
       
     end
   end
