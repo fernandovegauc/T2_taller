@@ -22,6 +22,17 @@ class TracksController < ApplicationController
   end
   
   def index
+    if params[:album_id].present?
+      album = Album.find_by(id: params[:album_id])
+      return status: 404 if album.blank?
+
+      render json: album.tracks, status: 200 
+    elsif params[:artist_id].present?
+      artist = Artist.find_by(id: params[:artist_id])
+      return status: 404 if artist.blank?
+    else
+      render json: Track.all, status: 200
+    end
     
   end
 
