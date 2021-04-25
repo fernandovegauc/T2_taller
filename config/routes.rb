@@ -1,19 +1,5 @@
 Rails.application.routes.draw do
-  get 'albums/create'
-  get 'albums/index'
-  get 'albums/show'
-  get 'albums/play'
-  get 'albums/destroy'
-  get 'tracks/create'
-  get 'tracks/index'
-  get 'tracks/show'
-  get 'tracks/play'
-  get 'tracks/destroy'
-  get 'artists/create'
-  get 'artists/index'
-  get 'artists/show'
-  get 'artists/play'
-  get 'artists/destroy'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :artists, only: [:create, :index, :show, :destroy] do
     resources :albums, only: [:create, :index]
