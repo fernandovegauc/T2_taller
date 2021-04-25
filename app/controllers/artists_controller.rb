@@ -18,7 +18,7 @@ class ArtistsController < ApplicationController
   end
 
   def index
-    render json: Artist.all, :status => 200
+    render json: Artist.all, status: 200
   end
 
   def show  
