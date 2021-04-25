@@ -10,9 +10,9 @@ class TracksController < ApplicationController
     
     track = Track.new
     track.id = encoding("#{params[:name]}:#{params[:album_id]}")
-    track.album_url = "https://spotifyapi1997.herokuapp.com/albums/#{params[:album_id]}"
-    track.artist_url = "https://spotifyapi1997.herokuapp.com/artists/#{search_album.artist_id}"
-    track.self_url = "https://spotifyapi1997.herokuapp.com/tracks/#{track.id}"
+    track.album_url = "https://t2tallerintegracion.herokuapp.com/albums/#{params[:album_id]}"
+    track.artist_url = "https://t2tallerintegracion.herokuapp.com/artists/#{search_album.artist_id}"
+    track.self_url = "https://t2tallerintegracion.herokuapp.com/#{track.id}"
     track.duration = params[:duration]
     track.times_played = 0
     track.album_id = params[:album_id]
