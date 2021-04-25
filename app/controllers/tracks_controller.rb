@@ -27,14 +27,14 @@ class TracksController < ApplicationController
 
     return render status: 404 if Artist.find_by(id: params[:artist_id]).blank?
 
-    albums = Album.where(artist_id: params[:artist_id])
-    response = []
-    albums.each do |album|
-      album.tracks do |track|
-        response << track
-      end
-    end
-    render json: response , status: 200 
+    artist = Artist.find_by(id: params[:artist_id])
+    return status: 404 if artists.blank?
+    
+    render json: artist.albums.map { |album| album.tracks }.flatten, stauts: 200
+
+   
+    
+    
   end
 
   def show
