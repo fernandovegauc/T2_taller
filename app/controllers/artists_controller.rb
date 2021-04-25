@@ -38,7 +38,7 @@ class ArtistsController < ApplicationController
 
   def show
     artist = Artist.find_by id: params[:id]
-    return render json: artist
+    
     response = {id: artist.id, name:  artist.name ,
        age: artist.age, albums: artist.albums_url, tracks: artist.tracks_url, self: artist.self_url }
    
