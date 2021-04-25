@@ -22,11 +22,10 @@ class TracksController < ApplicationController
     end
   def index
     return render json: Track.all, status: 200 if params.blank?
-    if params[:album_id]
-      return render json: Track.where(album_id: params[:album_id]), status: 200 
+    
+    return render json: Track.where(album_id: params[:album_id]), status: 200 if params[:album_id].present? 
 
-    else
-      return render json: Album.where(artist_id: params[:artist_id]).tracks, status: 200 
+    return render json: Album.where(artist_id: params[:artist_id]).tracks, status: 200 if params[:artist_id].present?
 
     end  
   end
