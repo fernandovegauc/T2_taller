@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
     def encoding(name)
         
         encoded = Base64.encode64(name).strip
-        return encoded.truncate(22)
+        return encoded[0..21]
 
     end
 
