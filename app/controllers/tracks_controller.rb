@@ -27,7 +27,7 @@ class TracksController < ApplicationController
 
     return render json: Album.where(artist_id: params[:artist_id]).tracks, status: 200 if params[:artist_id].present?
 
-    end  
+    
   end
 
   def show
