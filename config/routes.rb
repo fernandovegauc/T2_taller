@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
   resources :tracks, only: [:index, :show, :destroy] 
   put 'artists/:id/albums/play', to: 'artists#play'
-  put 'albums/:id/albums/tracks/play', to: 'albums#play'
+  put 'albums/:id/tracks/play', to: 'albums#play'
   put 'tracks/:id/play', to: 'tracks#play'
 end

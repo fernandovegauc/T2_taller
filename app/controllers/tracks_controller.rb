@@ -1,18 +1,15 @@
 class TracksController < ApplicationController
   def create
-    search_album = Album.find_by id: params[:album_id]
-   
-    
-    
     return render json: {}, status: 400 if (params[:name].blank? || params[:duration].blank? )
-    track = Track.find_by(id: encoding(params[:name]))
-    return render json: track, status: 409 if track.present?
+
+    search_album = Album.find_by id: params[:album_id]
     return render status: 422 if search_album.blank?
-    
-    
+
+    track = Track.find_by(id: encoding("#{params[:name]}:#{params[:album_id]}"))
+    return render json: track, status: 409 if track.present?
     
     track = Track.new
-    track.id = encoding(params[:name])
+    track.id = encoding("#{params[:name]}:#{params[:album_id]}")
     track.album_url = "https://spotifyapi1997.herokuapp.com/albums/#{params[:album_id]}"
     track.artist_url = "https://spotifyapi1997.herokuapp.com/artists/#{search_album.artist_id}"
     track.self_url = "https://spotifyapi1997.herokuapp.com/tracks/#{track.id}"
@@ -20,45 +17,26 @@ class TracksController < ApplicationController
     track.times_played = 0
     track.album_id = params[:album_id]
     track.name = params[:name]
-    
     track.save
-    response = {
-      id:  track.id, name: track.name , 
-      times_played: track.times_played, album:  track.album_url,
-       artist:  track.artist_url, self: track.self_url }
-    render json: response, status: 201
-    
-
+    render json: track, status: 201
     end
   def index
-    tracks = Track.all
-    return render json: tracks
-    response = []
-    tracks.each do |track|
-      response << {
-        id:  track.id, name: track.name , 
-        times_played: track.times_played, album:  track.album_url,
-         artist:  track.artist_url, self: track.self_url }
-    end
-    
-    render json: response, :status => 200
+    return render json: Track.all, status: 200 if params.blank?
+    if params[:album_id]
+      return render json: Track.where(album_id: params[:album_id]), status: 200 
+
+    else
+      return render json: Album.where(artist_id: params[:artist_id]).tracks, status: 200 
+
+    end  
   end
 
   def show
     track = Track.find_by id: params[:id]
-    
-   
     if track.present?
-      response = {
-        id:  track.id, name: track.name , 
-        times_played: track.times_played, album:  track.album_url,
-         artist:  track.artist_url, self: track.self_url }
-      render json: response, status:  200
-
-      
+      render json: track, status:  200  
     else
-      render  :status => 404
-      
+      render  status:  404
     end
   end
 
@@ -71,14 +49,11 @@ class TracksController < ApplicationController
 
   def destroy
     track = Track.find_by id: params[:id]
-
     if track.present?
       track.destroy
-      render status: 202
-      
+      render status: 202 
     else
-      render status: 404
-      
+      render status: 404    
     end
   end
 end

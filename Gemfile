@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
-#to serialize json
-gem 'fast_jsonapi', '~> 1.5'
+
+
+gem 'active_model_serializers', '~> 0.10.12'
 
 
 
