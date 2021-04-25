@@ -44,11 +44,15 @@ class AlbumsController < ApplicationController
     album = Album.find_by id: params[:id]
    
     if album.present?
-      render json: album, status:  200
+      response = {
+        id:  album.id, name: album.name , 
+        genre: album.genre, artist:  album.artist_url,
+         tracks:  album.tracks_url, self: album.self_url }
+      render json: response status:  200
 
       
     else
-      render json: album, :status => 404
+      render  :status => 404
       
     end
   end

@@ -46,17 +46,18 @@ class TracksController < ApplicationController
 
   def show
     track = Track.find_by id: params[:id]
-    response = {
-      id:  track.id, name: track.name , 
-      times_played: track.times_played, album:  track.album_url,
-       artist:  track.artist_url, self: track.self_url }
+    
    
     if track.present?
+      response = {
+        id:  track.id, name: track.name , 
+        times_played: track.times_played, album:  track.album_url,
+         artist:  track.artist_url, self: track.self_url }
       render json: response, status:  200
 
       
     else
-      render json: response, :status => 404
+      render json: :status => 404
       
     end
   end

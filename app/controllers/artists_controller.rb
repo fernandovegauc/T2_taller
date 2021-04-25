@@ -39,15 +39,16 @@ class ArtistsController < ApplicationController
   def show
     artist = Artist.find_by id: params[:id]
     
-    response = {id: artist.id, name:  artist.name ,
-       age: artist.age, albums: artist.albums_url, tracks: artist.tracks_url, self: artist.self_url }
+    
    
     if artist.present?
+      response = {id: artist.id, name:  artist.name ,
+        age: artist.age, albums: artist.albums_url, tracks: artist.tracks_url, self: artist.self_url }
       render json: response, status:  200
 
       
     else
-      render json: response, status: 404
+      render json:  status: 404
       
     end
 
