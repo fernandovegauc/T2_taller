@@ -21,17 +21,19 @@ class TracksController < ApplicationController
     render json: track, status: 201
     end
   def index
-    return render json: Track.all, status: 200 if (params[:album_id].blank? && params[:artist_id].blank?)
-    
-    return render json: (Album.find_by(id: params[:album_id])).tracks, status: 200 if params[:album_id].present? 
+    if params[:artist_id].present?
+      artist = Artist.find_by(id: params[:artist_id])
+      return head :not_found if artist.blank?
 
-    return render status: 404 if Artist.find_by(id: params[:artist_id]).blank?
+      render json: artist.albums.map { |album| album.tracks }.flatten, stauts: :ok
+    elsif index_params[:album_id]
+      album = Album.find_by(id: params[:album_id])
+      return head :not_found if album.blank?
 
-    artist = Artist.find_by(id: params[:artist_id])
-    return status: 404 if artists.blank?
-
-    render json: artist.albums.map { |album| album.tracks }.flatten, status: 200 
-    
+      render json: album.tracks, stauts: :ok
+    else
+      render json: Track.all, status: :ok
+    end
   end
 
   def show
