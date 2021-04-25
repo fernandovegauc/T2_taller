@@ -28,19 +28,13 @@ class TracksController < ApplicationController
     return render status: 404 if Artist.find_by(id: params[:artist_id]).blank?
 
     albums = Album.where(artist_id: params[:artist_id])
-    response= {}
+    response= []
     albums.each do |album|:
       album.tracks do |track|
         response << track
       end
     end
-    render json: response , status: 200
-
-    
-
-
-
-    
+    render json: response , status: 200 
   end
 
   def show
