@@ -9,9 +9,9 @@ class ArtistsController < ApplicationController
     
     artist = Artist.new
     artist.id = encoding(params[:name])
-    artist.albums_url = "https://t2tallerintegracion.herokuapp.com/artists/#{artist.id}/albums"
-    artist.tracks_url = "https://t2tallerintegracion.herokuapp.com/artists/#{artist.id}/tracks"
-    artist.self_url = "https://t2tallerintegracion.herokuapp.com/artists/#{artist.id}"
+    artist.albums_url = "https://spotifyapi1997.herokuapp.com/artists/#{artist.id}/albums"
+    artist.tracks_url = "https://spotifyapi1997.herokuapp.com/artists/#{artist.id}/tracks"
+    artist.self_url = "https://spotifyapi1997.herokuapp.com/artists/#{artist.id}"
     artist.name = params[:name]
     artist.age = params[:age]
     

@@ -10,9 +10,9 @@ class AlbumsController < ApplicationController
     album = Album.new
     album.id = encoding(params[:name])
     album.artist_id = params[:artist_id]
-    album.artist_url = "https://t2tallerintegracion.herokuapp.com/artists/#{params[:artist_id]}"
-    album.tracks_url = "https://t2tallerintegracion.herokuapp.com/artists/#{album.id}/tracks"
-    album.self_url = "https://t2tallerintegracion.herokuapp.com/albums/#{album.id}"
+    album.artist_url = "https://spotifyapi1997.herokuapp.com/artists/#{params[:artist_id]}"
+    album.tracks_url = "https://spotifyapi1997.herokuapp.com/artists/#{album.id}/tracks"
+    album.self_url = "https://spotifyapi1997.herokuapp.com/albums/#{album.id}"
     album.name = params[:name]
     album.genre = params[:genre]
 
