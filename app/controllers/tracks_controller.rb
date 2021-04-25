@@ -30,6 +30,7 @@ class TracksController < ApplicationController
     elsif params[:artist_id].present?
       artist = Artist.find_by(id: params[:artist_id])
       return status: 404 if artist.blank?
+      return status: 200
     else
       render json: Track.all, status: 200
     end
