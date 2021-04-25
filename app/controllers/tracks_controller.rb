@@ -27,7 +27,7 @@ class TracksController < ApplicationController
 
     return render status: 404 if Artist.find_by(id: params[:artist_id]).blank?
 
-    return render json: Album.where(artist_id: params[:artist_id]).tracks, status: 200 if params[:artist_id].present?
+    return render json: (Album.where(artist_id: params[:artist_id])).tracks, status: 200 
 
     
   end
