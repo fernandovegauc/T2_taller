@@ -57,7 +57,7 @@ class TracksController < ApplicationController
     track = Track.find_by id: params[:id]
     if track.present?
       track.destroy
-      render status: 202 
+      render status: 204 
     else
       render status: 404    
     end
