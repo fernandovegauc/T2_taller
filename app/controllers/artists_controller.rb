@@ -45,7 +45,7 @@ class ArtistsController < ApplicationController
     artist = Artist.find_by id: params[:id]
     if artist.present?
       artist.destroy
-      render status: 202     
+      render status: 204     
     else
       render status: 404   
     end
