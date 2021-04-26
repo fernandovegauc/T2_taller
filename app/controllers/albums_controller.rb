@@ -51,7 +51,7 @@ class AlbumsController < ApplicationController
     album = Album.find_by id: params[:id]
     if album.present?
       album.destroy
-      render status: 202
+      render status: 204
     else
       render status: 404
       
